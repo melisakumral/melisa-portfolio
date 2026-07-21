@@ -164,15 +164,24 @@ function renderFeatured(lang) {
   if (!items.length) {
     const msg = translations['featured.empty'][lang] || translations['featured.empty'].tr;
     gallery.innerHTML = `<div class="featured-empty">${escapeHtml(msg)}</div>`;
-    updateFeaturedArrows();
+    renderFeaturedDots(0);
+    updateFeaturedNav();
     return;
   }
 
   const viewLiveLabel = translations['featured.viewLive'][lang] || translations['featured.viewLive'].tr;
   const readPostLabel = translations['blog.read'][lang] || translations['blog.read'].tr;
+  const locale = lang === 'tr' ? 'tr-TR' : 'en-US';
+
+  const formatDate = (d) => {
+    try { return new Date(d).toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' }); }
+    catch (e) { return ''; }
+  };
 
   gallery.innerHTML = items.map(item => {
     const excerpt = item.desc.length > 140 ? item.desc.slice(0, 140).trim() + '…' : item.desc;
+    const dateStr = formatDate(item.date);
+    const meta = `<div class="featured-card-meta"><span class="featured-card-tag">${escapeHtml(item.tag)}</span>${dateStr ? `<span class="featured-card-date">${escapeHtml(dateStr)}</span>` : ''}</div>`;
 
     if (item.type === 'project') {
       const visual = item.image
@@ -190,7 +199,7 @@ function renderFeatured(lang) {
             <div class="featured-mockup-img">${visual}</div>
           </div>
           <div class="featured-card-body">
-            <span class="featured-card-tag">${escapeHtml(item.tag)}</span>
+            ${meta}
             <h3 class="featured-card-title">${escapeHtml(item.title)}</h3>
             <p class="featured-card-desc">${escapeHtml(excerpt)}</p>
             <span class="featured-card-link">${viewLiveLabel}</span>
@@ -204,7 +213,7 @@ function renderFeatured(lang) {
           ${item.image ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy">` : `<span class="featured-post-icon">✎</span>`}
         </div>
         <div class="featured-card-body">
-          <span class="featured-card-tag">${escapeHtml(item.tag)}</span>
+          ${meta}
           <h3 class="featured-card-title">${escapeHtml(item.title)}</h3>
           <p class="featured-card-desc">${escapeHtml(excerpt)}</p>
           <span class="featured-card-link">${readPostLabel}</span>
@@ -212,17 +221,48 @@ function renderFeatured(lang) {
       </a>`;
   }).join('');
 
-  updateFeaturedArrows();
+  renderFeaturedDots(items.length);
+  updateFeaturedNav();
 }
 
-function updateFeaturedArrows() {
+function renderFeaturedDots(count) {
+  const dotsWrap = document.getElementById('featuredDots');
+  if (!dotsWrap) return;
+  if (count <= 1) { dotsWrap.innerHTML = ''; return; }
+
+  dotsWrap.innerHTML = Array.from({ length: count }, (_, i) =>
+    `<button class="featured-dot${i === 0 ? ' active' : ''}" type="button" data-index="${i}" aria-label="${i + 1}"></button>`
+  ).join('');
+
+  dotsWrap.querySelectorAll('.featured-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const gallery = document.getElementById('featuredGallery');
+      const card = gallery && gallery.querySelectorAll('.featured-card')[Number(dot.getAttribute('data-index'))];
+      if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    });
+  });
+}
+
+function updateFeaturedNav() {
   const gallery = document.getElementById('featuredGallery');
   const prevBtn = document.getElementById('featuredPrev');
   const nextBtn = document.getElementById('featuredNext');
   if (!gallery || !prevBtn || !nextBtn) return;
+
   const maxScroll = gallery.scrollWidth - gallery.clientWidth - 2;
   prevBtn.disabled = gallery.scrollLeft <= 2;
   nextBtn.disabled = maxScroll <= 0 || gallery.scrollLeft >= maxScroll;
+
+  const dots = document.querySelectorAll('.featured-dot');
+  if (!dots.length) return;
+  const cards = gallery.querySelectorAll('.featured-card');
+  let closestIdx = 0;
+  let closestDist = Infinity;
+  cards.forEach((card, i) => {
+    const dist = Math.abs(card.offsetLeft - gallery.scrollLeft);
+    if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+  });
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === closestIdx));
 }
 
 function initFeaturedGallery() {
@@ -233,14 +273,14 @@ function initFeaturedGallery() {
 
   const scrollByCard = (dir) => {
     const card = gallery.querySelector('.featured-card');
-    const amount = card ? card.getBoundingClientRect().width + 24 : 320;
+    const amount = card ? card.getBoundingClientRect().width + 26 : 320;
     gallery.scrollBy({ left: dir * amount, behavior: 'smooth' });
   };
 
   prevBtn.addEventListener('click', () => scrollByCard(-1));
   nextBtn.addEventListener('click', () => scrollByCard(1));
-  gallery.addEventListener('scroll', () => updateFeaturedArrows());
-  window.addEventListener('resize', () => updateFeaturedArrows());
+  gallery.addEventListener('scroll', () => updateFeaturedNav());
+  window.addEventListener('resize', () => updateFeaturedNav());
 
   const lang = document.documentElement.getAttribute('lang') || 'tr';
   renderFeatured(lang);
