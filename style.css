@@ -1566,15 +1566,6 @@ body {
 
 .contact-form { display: flex; flex-direction: column; gap: 20px; }
 
-.contact-form-embed { padding: 0; overflow: hidden; }
-.contact-form-embed iframe {
-  display: block;
-  width: 100%;
-  height: 760px;
-  border: none;
-  background: #fff;
-}
-
 .form-row { display: flex; flex-direction: column; gap: 8px; }
 
 .contact-form label {

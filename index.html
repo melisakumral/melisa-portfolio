@@ -544,7 +544,7 @@
             <span class="info-icon">✉</span>
             <div>
               <span class="info-label" data-i18n="contact.info.email">E-posta</span>
-              <a href="mailto:melisakumral@gmail.com">melisakumral@gmail.com</a>
+              <a href="mailto:melisakumral356@gmail.com">melisakumral356@gmail.com</a>
             </div>
           </li>
           <li>
@@ -569,13 +569,25 @@
         </div>
       </div>
 
-      <div class="contact-card contact-form-embed">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSeC3n2zRf4wCIoxRSTFJKTiwFekSqnGrw4npjy73TFsfJt4oA/viewform?embedded=true"
-          title="İletişim Formu" loading="lazy">
-          Yükleniyor…
-        </iframe>
-      </div>
+      <form id="contactForm" class="contact-card contact-form">
+        <div class="form-row">
+          <label for="name" data-i18n="contact.form.name">Adınız</label>
+          <input type="text" id="name" name="name" required autocomplete="off" placeholder="Adınız Soyadınız" data-i18n-placeholder="contact.form.namePh" />
+        </div>
+
+        <div class="form-row">
+          <label for="email" data-i18n="contact.form.email">E-posta</label>
+          <input type="email" id="email" name="email" required autocomplete="off" placeholder="ornek@eposta.com" />
+        </div>
+
+        <div class="form-row">
+          <label for="message" data-i18n="contact.form.message">Mesajınız</label>
+          <textarea id="message" name="message" rows="6" required placeholder="Mesajınızı buraya yazın..." data-i18n-placeholder="contact.form.messagePh"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-submit" data-i18n="contact.form.submit">Mesajı Gönder</button>
+        <p id="formStatus" class="form-status"></p>
+      </form>
     </div>
   </section>
 

@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutTabs();
   initBlogFeed();
   initFeaturedGallery();
+  initContactForm();
 });
 
 /* ---------- About section tabs (Bio / Experience / Certifications) ---------- */
@@ -734,4 +735,49 @@ function initProjectModal() {
   });
 }
 
-/* ---------- Contact form (Formspree AJAX submit) ---------- */
+/* ---------- Contact form (site's own design, submits quietly to a Google Form) ----------
+   The form below keeps the site's bordeaux/cream styling. On submit it POSTs the values
+   straight to the connected Google Form's response endpoint (mode: 'no-cors', so we can't
+   read the response — a successful network call is treated as success). Every submission
+   lands in the Google Form's "Yanıtlar" tab, and — if e-mail notifications are turned on
+   there (Yanıtlar > ⋮ > "E-posta bildirimlerini aç") — in melisakumral356@gmail.com's inbox. */
+const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSeC3n2zRf4wCIoxRSTFJKTiwFekSqnGrw4npjy73TFsfJt4oA/formResponse';
+const GOOGLE_FORM_ENTRIES = {
+  name: 'entry.1289411156',
+  email: 'entry.2110164488',
+  message: 'entry.233296932'
+};
+
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const lang = document.documentElement.getAttribute('lang') || 'tr';
+    status.textContent = lang === 'tr' ? 'Gönderiliyor...' : 'Sending...';
+    status.style.color = 'var(--text-dim)';
+
+    const body = new URLSearchParams();
+    body.append(GOOGLE_FORM_ENTRIES.name, form.name.value);
+    body.append(GOOGLE_FORM_ENTRIES.email, form.email.value);
+    body.append(GOOGLE_FORM_ENTRIES.message, form.message.value);
+
+    try {
+      await fetch(GOOGLE_FORM_ACTION, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+      // no-cors gives us an opaque response, so a network call that didn't throw counts as success
+      status.textContent = lang === 'tr' ? 'Mesajınız başarıyla gönderildi. Teşekkürler!' : 'Your message has been sent. Thank you!';
+      status.style.color = '#2e7d4f';
+      form.reset();
+    } catch (err) {
+      status.textContent = lang === 'tr' ? 'Bağlantı hatası. İnternetinizi kontrol edin.' : 'Connection error. Please check your internet.';
+      status.style.color = 'var(--bordeaux)';
+    }
+  });
+}
