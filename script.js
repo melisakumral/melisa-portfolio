@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initScrollSpy();
   initFadeIn();
-  initContactForm();
   initCounters();
   initProjectModal();
   initAboutTabs();
@@ -736,36 +735,3 @@ function initProjectModal() {
 }
 
 /* ---------- Contact form (Formspree AJAX submit) ---------- */
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  const status = document.getElementById('formStatus');
-  if (!form) return;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    status.textContent = 'Gönderiliyor...';
-    status.style.color = 'var(--text-dim)';
-
-    const data = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' }
-      });
-
-      if (response.ok) {
-        status.textContent = 'Mesajınız başarıyla gönderildi. Teşekkürler!';
-        status.style.color = '#2e7d4f';
-        form.reset();
-      } else {
-        status.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
-        status.style.color = 'var(--bordeaux)';
-      }
-    } catch (err) {
-      status.textContent = 'Bağlantı hatası. İnternetinizi kontrol edin.';
-      status.style.color = 'var(--bordeaux)';
-    }
-  });
-}
