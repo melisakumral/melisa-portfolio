@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Melisa — Siber Güvenlik Uzmanı &amp; Full Stack Geliştirici</title>
+<meta name="description" content="Melisa'nın kişisel portföy sitesi: siber güvenlik, tersine mühendislik ve full-stack geliştirme projeleri." />
+<meta name="theme-color" content="#4c0e19" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Melisa — Siber Güvenlik Uzmanı & Full Stack Geliştirici" />
+<meta property="og:description" content="Tersine mühendislik, web güvenliği ve full-stack geliştirme üzerine portföy sitesi." />
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:image" content="og-image.png" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Melisa — Siber Güvenlik Uzmanı & Full Stack Geliştirici" />
+<meta name="twitter:description" content="Tersine mühendislik, web güvenliği ve full-stack geliştirme üzerine portföy sitesi." />
+<meta name="twitter:image" content="og-image.png" />
+
+<link rel="canonical" href="https://melisa-portfolio.vercel.app/" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loader" class="loader">
+  <div class="loader-mark">
+    <span class="logo-mark logo-mark-lg">M</span>
+    <span class="loader-word">MELİSA</span>
+  </div>
+</div>
+
+<!-- Asymmetric color block background -->
+<div class="bg-blocks" aria-hidden="true">
+  <div class="block block-1"></div>
+  <div class="block block-2"></div>
+  <div class="block block-3"></div>
+  <div class="block block-4"></div>
+</div>
+
+<!-- Top navbar -->
+<nav id="navbar" class="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="Ana sayfa">
+      <span class="logo-mark">M</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" class="nav-link active" data-i18n="dock.home">Ana Sayfa</a></li>
+      <li><a href="#about" class="nav-link" data-i18n="dock.about">Hakkımda</a></li>
+      <li><a href="#services" class="nav-link" data-i18n="dock.services">Hizmetler</a></li>
+      <li><a href="#projects" class="nav-link" data-i18n="dock.projects">Projeler</a></li>
+      <li><a href="#blog" class="nav-link" data-i18n="dock.blog">Yazılar</a></li>
+      <li><a href="#contact" class="nav-link" data-i18n="dock.contact">İletişim</a></li>
+    </ul>
+
+    <div class="nav-extras">
+      <button id="langToggle" class="lang-toggle-btn" type="button" aria-label="Dili değiştir" title="Dili değiştir">
+        <span class="lang-code">EN</span>
+      </button>
+      <a href="https://github.com/melisakumral" target="_blank" rel="noopener" class="nav-social" aria-label="GitHub">◈</a>
+      <a href="https://www.linkedin.com/in/melisa-kumral/" target="_blank" rel="noopener" class="nav-social" aria-label="LinkedIn">↗</a>
+      <a href="https://medium.com/@melisakumral" target="_blank" rel="noopener" class="nav-social" aria-label="Medium">M</a>
+    </div>
+  </div>
+</nav>
+
+<main class="main-content">
+
+  <!-- HERO (split: text + mounted note board) -->
+  <section id="hero" class="hero">
+    <div class="hero-split">
+      <div class="hero-content fade-in">
+        <p class="hero-eyebrow" data-i18n="hero.eyebrow">Siber Güvenlik Uzmanı &amp; Full Stack Geliştirici</p>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title1">Merhaba, ben</span> <span class="accent" data-i18n="hero.name">Melisa</span>
+        </h1>
+        <p class="hero-desc" data-i18n="hero.desc">
+          Güvenlik açıklarını bulup kapatmayı, sağlam ve ölçeklenebilir yazılımlar
+          geliştirmeyi seviyorum. Tersine mühendislikten web güvenliğine, uçtan uca
+          geliştirme süreçlerine kadar geniş bir yelpazede çalışıyorum.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.cta.projects">Projelerimi Gör</a>
+          <a href="#contact" class="btn btn-outline" data-i18n="hero.cta.contact">İletişime Geç</a>
+          <a href="cv.pdf" download class="btn-ghost" data-i18n="hero.cta.cv">⬇ CV İndir</a>
+        </div>
+      </div>
+
+      <div class="hero-board-mount fade-in">
+        <span class="mount-screw mount-screw-tl"></span>
+        <span class="mount-screw mount-screw-tr"></span>
+        <span class="mount-screw mount-screw-bl"></span>
+        <span class="mount-screw mount-screw-br"></span>
+        <div class="hero-board">
+          <div class="hnote hnote-1">
+            <span class="hnote-pin"></span>
+            <span class="hnote-label" data-i18n="hero.note.reverse">Reverse&nbsp;Engineering</span>
+          </div>
+          <div class="hnote hnote-2">
+            <span class="hnote-pin hnote-pin-gold"></span>
+            <span class="hnote-label" data-i18n="hero.note.web">Web Security</span>
+          </div>
+          <div class="hnote hnote-3">
+            <span class="hnote-pin"></span>
+            <span class="hnote-label" data-i18n="hero.note.stack">Full Stack</span>
+          </div>
+          <div class="hnote hnote-4 hnote-quote">
+            <span class="hnote-pin hnote-pin-gold"></span>
+            <p data-i18n="hero.note.quote">"Güvenlik açıklarını bulmak, kapatmaktan daha zevkli."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-hint" data-i18n="hero.scroll">Aşağı kaydır</a>
+  </section>
+
+  <!-- ABOUT (tabbed: Bio / Experience / Certifications) -->
+  <section id="about" class="section about-tabs-section">
+    <div class="section-header fade-in">
+      <span class="about-label" data-i18n="about.label">Kimim</span>
+      <h2 class="section-title" data-i18n="about.title">Hakkımda <span class="title-underline"></span></h2>
+    </div>
+
+    <div class="about-tabs-wrap fade-in">
+      <div class="about-tabs-nav" role="tablist">
+        <button class="about-tab-btn active" data-tab="bio" role="tab" aria-selected="true" data-i18n="tabs.bio">Hakkımda</button>
+        <button class="about-tab-btn" data-tab="experience" role="tab" aria-selected="false" data-i18n="tabs.experience">Deneyim &amp; Eğitim</button>
+        <button class="about-tab-btn" data-tab="certs" role="tab" aria-selected="false" data-i18n="tabs.certs">Sertifikalar</button>
+      </div>
+
+      <div class="about-tab-panels">
+
+        <!-- TAB: BIO -->
+        <div class="about-tab-panel active" data-panel="bio">
+          <div class="about-grid">
+            <div class="about-card">
+              <p data-i18n="about.text1">
+                Kariyerimde sürekli olarak yeni fırsatlar keşfetmeye ve teknolojik yetkinliklerimi
+                derinleştirmeye odaklanmış biriyim. Yeni şeyler öğrenme tutkum, beni farklı
+                platformlarda çeşitli eğitim programlarına yönlendiriyor. Edindiğim bilgileri
+                yalnızca teoride bırakmıyor; bunları pratiğe dökerek uçtan uca, aktif yazılım
+                projeleri üretiyorum. Gerek hackathon'larda geliştirdiğimiz yenilikçi çözümler
+                gerekse takım olarak hayata geçirdiğimiz uygulamaların tüm geliştirme
+                döngülerinde (Front-end ve Back-end) sorumluluk alarak fikirleri somut ürünlere
+                dönüştürüyorum.
+              </p>
+              <p data-i18n="about.text2">
+                Şu anda Siber Vatan programı kapsamında siber güvenlik alanında aktif eğitimler
+                alıp projeler yürütüyor ve bu ekosistemde kendimi sürekli geliştiriyorum. Aynı
+                zamanda bir dijital kariyer platformu olan PythianGo'da Kampüs Elçisi olarak
+                görev alıyor, kariyer odaklı ağımı genişletiyorum.
+              </p>
+              <p data-i18n="about.text3">
+                Tüm bu teknik ve profesyonel üretim süreçlerinin yanı sıra, matematik özel
+                dersleri vererek eğitim alanındaki tutkumu da sürdürüyorum. Öğretim süreci,
+                bilgi aktarmanın ötesinde iletişim ve öğretme yeteneklerimi sürekli taze
+                tuttuğum değerli bir deneyim alanı. Hem teknoloji ekosisteminde yeni projeler
+                üretmeye hem de kariyerimde sağlam adımlarla ilerleyerek en iyisini yapmaya
+                devam ediyorum.
+              </p>
+              <ul class="about-list">
+                <li><span class="dot"></span> <span data-i18n="about.list1">Bilgisayar Mühendisliği, 3. Sınıf — Bülent Ecevit Üniversitesi</span></li>
+                <li><span class="dot"></span> <span data-i18n="about.list2">Full-Stack Engineer @ Blue Network</span></li>
+                <li><span class="dot"></span> <span data-i18n="about.list3">Başkan @ Karaelmas Yazılım Topluluğu</span></li>
+                <li><span class="dot"></span> <span data-i18n="about.list4">Odak: Ağ Teknolojileri, Sistem Yönetimi, Siber Güvenlik, Full-Stack Geliştirme</span></li>
+              </ul>
+            </div>
+            <div class="about-visual">
+              <div class="stat-card stat-card-1">
+                <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+                <span class="stat-label" data-i18n="about.stat1">Yıl Deneyim</span>
+              </div>
+              <div class="stat-card stat-card-2">
+                <span class="stat-number" data-count="6">0</span><span class="stat-plus">+</span>
+                <span class="stat-label" data-i18n="about.stat2">Tamamlanan Proje</span>
+              </div>
+              <div class="stat-card stat-card-3">
+                <span class="stat-number" data-count="11">0</span><span class="stat-plus">+</span>
+                <span class="stat-label" data-i18n="about.stat3">Sertifika &amp; Eğitim</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: EXPERIENCE -->
+        <div class="about-tab-panel" data-panel="experience">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.edu">Eğitim</span>
+                <h3 data-i18n="timeline.edu.title">Bilgisayar Mühendisliği</h3>
+                <p class="timeline-org" data-i18n="timeline.edu.org">Bülent Ecevit Üniversitesi</p>
+                <p class="timeline-date" data-i18n="timeline.edu.date">2023 – Günümüz</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.work">Deneyim</span>
+                <h3 data-i18n="timeline.work.title">Full-Stack Engineer</h3>
+                <p class="timeline-org" data-i18n="timeline.work.org">Blue Network</p>
+                <p class="timeline-date" data-i18n="timeline.work.date">Kasım 2025 – Günümüz</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.work">Deneyim</span>
+                <h3 data-i18n="timeline.altay.title">Ekip Üyesi</h3>
+                <p class="timeline-org" data-i18n="timeline.altay.org">Altay (Siber Vatan)</p>
+                <p class="timeline-date" data-i18n="timeline.altay.date">Mart 2026 – Günümüz</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.work">Deneyim</span>
+                <h3 data-i18n="timeline.zayotem.title">Ekip Üyesi</h3>
+                <p class="timeline-org" data-i18n="timeline.zayotem.org">ZAYOTEM (Siber Vatan)</p>
+                <p class="timeline-date" data-i18n="timeline.zayotem.date">Kasım 2025 – Şubat 2026</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.work">Deneyim</span>
+                <h3 data-i18n="timeline.math.title">Matematik Özel Ders Eğitmeni</h3>
+                <p class="timeline-org" data-i18n="timeline.math.org">Bağımsız</p>
+                <p class="timeline-date" data-i18n="timeline.math.date">Kasım 2022 – Günümüz</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.lead">Liderlik</span>
+                <h3 data-i18n="timeline.lead.title">Başkan</h3>
+                <p class="timeline-org" data-i18n="timeline.lead.org">Karaelmas Yazılım Topluluğu</p>
+                <p class="timeline-date" data-i18n="timeline.lead.date">Nisan 2026 – Günümüz</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.lead">Gönüllülük</span>
+                <h3 data-i18n="timeline.hackviser.title">Kampüs Temsilcisi</h3>
+                <p class="timeline-org" data-i18n="timeline.hackviser.org">Hackviser</p>
+                <p class="timeline-date" data-i18n="timeline.hackviser.date">Haziran 2026 – Günümüz</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag" data-i18n="timeline.tag.lead">Gönüllülük</span>
+                <h3 data-i18n="timeline.sisterslab.title">Eğitmen</h3>
+                <p class="timeline-org" data-i18n="timeline.sisterslab.org">SisterLabs</p>
+                <p class="timeline-date" data-i18n="timeline.sisterslab.date">Haziran 2026 – Günümüz</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: CERTIFICATIONS -->
+        <div class="about-tab-panel" data-panel="certs">
+          <div class="certs-grid">
+            <div class="cert-badge">
+              <span class="cert-icon">🛡</span>
+              <div>
+                <h4 data-i18n="certs.c1.title">Certified Associate Penetration Tester (CAPT)</h4>
+                <p class="cert-issuer">Hackviser · 2026</p>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">🦠</span>
+              <div>
+                <h4 data-i18n="certs.c2.title">Zararlı Yazılım Analizi</h4>
+                <p class="cert-issuer">BTK Akademi · 2025</p>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">🇹🇷</span>
+              <div>
+                <h4 data-i18n="certs.c3.title">Türkiye Siber Vatan Programı Mezuniyeti</h4>
+                <p class="cert-issuer">T.C. Batı Karadeniz Kalkınma Ajansı · 2025</p>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">🌐</span>
+              <div>
+                <h4 data-i18n="certs.c4.title">Network Technician Career Path</h4>
+                <p class="cert-issuer">Cisco · 2026</p>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">🔐</span>
+              <div>
+                <h4 data-i18n="certs.c5.title">Introduction to Cybersecurity</h4>
+                <p class="cert-issuer">Cisco · 2025</p>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">🧠</span>
+              <div>
+                <h4 data-i18n="certs.c6.title">Python Programming for Data Science &amp; Feature Engineering</h4>
+                <p class="cert-issuer">Miuul · 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section skills">
+    <div class="section-header fade-in">
+      <span class="about-label" data-i18n="skills.label">Araç Kutusu</span>
+      <h2 class="section-title" data-i18n="skills.title">Yetkinlikler</h2>
+      <p class="section-sub" data-i18n="skills.sub">Günlük olarak kullandığım diller, çerçeveler ve güvenlik araçları.</p>
+    </div>
+
+    <div class="skills-grid fade-in">
+      <div class="skill-badge"><span class="skill-mark">Py</span><span>Python</span></div>
+      <div class="skill-badge"><span class="skill-mark">Php</span><span>PHP</span></div>
+      <div class="skill-badge"><span class="skill-mark">C</span><span>C / C++</span></div>
+      <div class="skill-badge"><span class="skill-mark">Sql</span><span>SQL</span></div>
+      <div class="skill-badge"><span class="skill-mark">Ida</span><span>IDA Pro</span></div>
+      <div class="skill-badge"><span class="skill-mark">Bp</span><span>Burp Suite</span></div>
+      <div class="skill-badge"><span class="skill-mark">Wk</span><span>Wireshark</span></div>
+      <div class="skill-badge"><span class="skill-mark">Nm</span><span>Nmap</span></div>
+      <div class="skill-badge"><span class="skill-mark">Dbg</span><span>x64dbg / x32dbg</span></div>
+      <div class="skill-badge"><span class="skill-mark">Die</span><span>Detect It Easy</span></div>
+      <div class="skill-badge"><span class="skill-mark">Net</span><span>TCP/IP · DNS · VLAN</span></div>
+      <div class="skill-badge"><span class="skill-mark">Ml</span><span>Makine Öğrenmesi</span></div>
+      <div class="skill-badge"><span class="skill-mark">Git</span><span>Git &amp; GitHub</span></div>
+      <div class="skill-badge"><span class="skill-mark">Lx</span><span>Linux</span></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section services">
+    <div class="section-header fade-in">
+      <span class="about-label" data-i18n="services.label">Ne Yapıyorum</span>
+      <h2 class="section-title" data-i18n="services.title">Hizmetler &amp; Yetkinlikler</h2>
+      <p class="section-sub" data-i18n="services.sub">Güvenlik odaklı yazılım geliştirme sürecinin her aşamasında yer alıyorum.</p>
+    </div>
+
+    <div class="cards-grid">
+      <article class="service-card fade-in">
+        <span class="card-num">01</span>
+        <h3 data-i18n="services.c1.title">Zararlı Yazılım Analizi</h3>
+        <p data-i18n="services.c1.desc">IDA Pro ile statik/dinamik analiz ve tersine mühendislik. Zararlı yazılım davranışlarının izole ortamlarda incelenmesi ve raporlanması.</p>
+        <div class="card-tags"><span>IDA Pro</span><span>Reverse Eng.</span><span>Sandboxing</span></div>
+      </article>
+
+      <article class="service-card fade-in">
+        <span class="card-num">02</span>
+        <h3 data-i18n="services.c2.title">Web Güvenliği &amp; Pentest</h3>
+        <p data-i18n="services.c2.desc">Zafiyet taramaları, exploit geliştirme ve sızma testleri. OWASP standartlarına uygun kapsamlı güvenlik denetimleri.</p>
+        <div class="card-tags"><span>Pentest</span><span>OWASP</span><span>Exploit Dev</span></div>
+      </article>
+
+      <article class="service-card fade-in">
+        <span class="card-num">03</span>
+        <h3 data-i18n="services.c3.title">Full-Stack Entegrasyon</h3>
+        <p data-i18n="services.c3.desc">Python, PHP, C, SQL ile güvenli mimari tasarımı. Uçtan uca güvenli, ölçeklenebilir yazılım sistemleri geliştirme.</p>
+        <div class="card-tags"><span>Python</span><span>PHP</span><span>C</span><span>SQL</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section projects">
+    <div class="section-header fade-in">
+      <span class="about-label" data-i18n="projects.label">Seçilmiş Çalışmalar</span>
+      <h2 class="section-title" data-i18n="projects.title">Projeler</h2>
+      <p class="section-sub" data-i18n="projects.sub">Üzerinde çalıştığım öne çıkan projelerden bazıları. Detaylar için karta tıkla.</p>
+    </div>
+
+    <div class="projects-grid">
+      <article class="project-card fade-in" data-project="joins" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="project-logo project-logo-1" aria-hidden="true">
+          <span>J</span>
+        </div>
+        <span class="card-num">01</span>
+        <span class="project-status status-live" data-i18n="projects.p1.status">Yayında</span>
+        <h3 data-i18n="projects.p1.title">Joins — Etkileşimli Quiz &amp; Yarışma Platformu</h3>
+        <p data-i18n="projects.p1.desc">Gerçek zamanlı soru-cevap ve yarışma deneyimi sunan yerli Kahoot alternatifi. Google Play ve App Store'da yayında.</p>
+        <div class="project-meta">
+          <span>Mobile</span><span>Full Stack</span><span>Ekip Çalışması</span>
+        </div>
+        <span class="card-cta" data-i18n="projects.cta">Detayları Gör →</span>
+      </article>
+
+      <article class="project-card fade-in" data-project="nebulagate" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="project-logo project-logo-2" aria-hidden="true">
+          <span>N</span>
+        </div>
+        <span class="card-num">02</span>
+        <span class="project-status status-proto" data-i18n="projects.p2.status">Hackathon Projesi</span>
+        <h3 data-i18n="projects.p2.title">NebulaGate — Akıllı Güvenlik Ağ Geçidi</h3>
+        <p data-i18n="projects.p2.desc">Yapay zekâ destekli risk puanlaması ve mikro ödeme mekanizmalarıyla bot trafiğini filtreleyen güvenlik ağ geçidi.</p>
+        <div class="project-meta">
+          <span>TypeScript</span><span>Soroban</span><span>x402</span>
+        </div>
+        <span class="card-cta" data-i18n="projects.cta">Detayları Gör →</span>
+      </article>
+
+      <article class="project-card fade-in" data-project="cybershield" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="project-logo project-logo-3" aria-hidden="true">
+          <span>🛡</span>
+        </div>
+        <span class="card-num">03</span>
+        <span class="project-status status-report" data-i18n="projects.p3.status">Güvenlik Mimarisi</span>
+        <h3 data-i18n="projects.p3.title">CyberShield — Savunma &amp; Saldırı Mimarisi</h3>
+        <p data-i18n="projects.p3.desc">Güvenlik açıklarının tespit edilmesi, simüle edilmesi ve güvenli yazılım geliştirme prensipleriyle giderilmesini hedefleyen mimari.</p>
+        <div class="project-meta">
+          <span>Security</span><span>Vulnerability</span><span>Architecture</span>
+        </div>
+        <span class="card-cta" data-i18n="projects.cta">Detayları Gör →</span>
+      </article>
+
+      <article class="project-card fade-in" data-project="aes" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="project-logo project-logo-4" aria-hidden="true">
+          <span>🔐</span>
+        </div>
+        <span class="card-num">04</span>
+        <span class="project-status status-proto" data-i18n="projects.p4.status">Kriptografi</span>
+        <h3 data-i18n="projects.p4.title">AES Şifreleme Uygulaması</h3>
+        <p data-i18n="projects.p4.desc">AES-128 algoritmasının temel bileşenlerinin Python ile sıfırdan uygulandığı kriptografi projesi.</p>
+        <div class="project-meta">
+          <span>Python</span><span>AES-128</span><span>Cryptography</span>
+        </div>
+        <span class="card-cta" data-i18n="projects.cta">Detayları Gör →</span>
+      </article>
+
+      <article class="project-card fade-in" data-project="sentiment" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="project-logo project-logo-5" aria-hidden="true">
+          <span>NLP</span>
+        </div>
+        <span class="card-num">05</span>
+        <span class="project-status status-proto" data-i18n="projects.p5.status">NLP Projesi</span>
+        <h3 data-i18n="projects.p5.title">Türkçe Duygu Analizi</h3>
+        <p data-i18n="projects.p5.desc">Sosyal medya verileri üzerinde DistilBERT modeliyle pozitif, negatif ve nötr duygu sınıflandırması.</p>
+        <div class="project-meta">
+          <span>NLP</span><span>DistilBERT</span><span>Python</span>
+        </div>
+        <span class="card-cta" data-i18n="projects.cta">Detayları Gör →</span>
+      </article>
+
+      <article class="project-card fade-in" data-project="salesplatform" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="project-logo project-logo-6" aria-hidden="true">
+          <span>S</span>
+        </div>
+        <span class="card-num">06</span>
+        <span class="project-status status-proto" data-i18n="projects.p6.status">Full-Stack Web</span>
+        <h3 data-i18n="projects.p6.title">Çok Kullanıcılı Satış Platformu</h3>
+        <p data-i18n="projects.p6.desc">Rol yönetimi ve PDF üretim özelliklerine sahip, PHP ve SQLite ile geliştirilen full-stack web uygulaması.</p>
+        <div class="project-meta">
+          <span>PHP</span><span>SQLite</span><span>Full Stack</span>
+        </div>
+        <span class="card-cta" data-i18n="projects.cta">Detayları Gör →</span>
+      </article>
+    </div>
+
+    <div class="projects-more fade-in">
+      <a href="https://github.com/melisakumral" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="projects.more">GitHub'da Tüm Projelerim →</a>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="section blog">
+    <div class="section-header fade-in">
+      <span class="about-label" data-i18n="blog.label">Yazılar</span>
+      <h2 class="section-title" data-i18n="blog.title">Blog</h2>
+      <p class="section-sub" data-i18n="blog.sub">Teknik notlarımı ve analizlerimi Medium üzerinde paylaşıyorum.</p>
+    </div>
+
+    <div class="blog-grid fade-in" id="blogGrid">
+      <div class="blog-loading" id="blogLoading" data-i18n="blog.loading">Yazılar yükleniyor...</div>
+    </div>
+
+    <div class="blog-more fade-in">
+      <a href="https://medium.com/@melisakumral" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="blog.more">Medium'da Tüm Yazılarım →</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact">
+    <div class="section-header fade-in">
+      <span class="about-label" data-i18n="contact.label">Birlikte Çalışalım</span>
+      <h2 class="section-title" data-i18n="contact.title">İletişime Geçin <span class="title-underline"></span></h2>
+      <p class="section-sub" data-i18n="contact.sub">Bir proje, iş birliği veya sorunuz mu var? Aşağıdan mesaj bırakabilirsiniz.</p>
+    </div>
+
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <h3 data-i18n="contact.info.title">İletişim Bilgileri</h3>
+        <p class="contact-info-desc" data-i18n="contact.info.desc">
+          Projeleriniz, iş birliği teklifleriniz veya sorularınız için doğrudan
+          ulaşabilir ya da yandaki formu doldurabilirsiniz.
+        </p>
+
+        <ul class="info-list">
+          <li>
+            <span class="info-icon">✉</span>
+            <div>
+              <span class="info-label" data-i18n="contact.info.email">E-posta</span>
+              <a href="mailto:melisakumral@gmail.com">melisakumral@gmail.com</a>
+            </div>
+          </li>
+          <li>
+            <span class="info-icon">◈</span>
+            <div>
+              <span class="info-label" data-i18n="contact.info.location">Konum</span>
+              <span>Balıkesir, Türkiye</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact-social">
+          <a href="https://www.linkedin.com/in/melisa-kumral/" target="_blank" rel="noopener" class="social-btn">
+            <span class="social-btn-icon">↗</span> LinkedIn
+          </a>
+          <a href="https://github.com/melisakumral" target="_blank" rel="noopener" class="social-btn">
+            <span class="social-btn-icon">◈</span> GitHub
+          </a>
+          <a href="https://medium.com/@melisakumral" target="_blank" rel="noopener" class="social-btn">
+            <span class="social-btn-icon">M</span> Medium
+          </a>
+        </div>
+      </div>
+
+      <form id="contactForm" class="contact-card contact-form" action="https://formspree.io/f/YOUR_ID" method="POST">
+        <div class="form-row">
+          <label for="name" data-i18n="contact.form.name">Adınız</label>
+          <input type="text" id="name" name="name" required autocomplete="off" placeholder="Adınız Soyadınız" data-i18n-placeholder="contact.form.namePh" />
+        </div>
+
+        <div class="form-row">
+          <label for="email" data-i18n="contact.form.email">E-posta</label>
+          <input type="email" id="email" name="email" required autocomplete="off" placeholder="ornek@eposta.com" />
+        </div>
+
+        <div class="form-row">
+          <label for="message" data-i18n="contact.form.message">Mesajınız</label>
+          <textarea id="message" name="message" rows="6" required placeholder="Mesajınızı buraya yazın..." data-i18n-placeholder="contact.form.messagePh"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-submit" data-i18n="contact.form.submit">Mesajı Gönder</button>
+        <p id="formStatus" class="form-status"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><span data-i18n="footer.rights">&copy; 2026 Melisa. Tüm hakları saklıdır.</span></p>
+  </footer>
+
+</main>
+
+<!-- Project detail modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Kapat">✕</button>
+    <div class="modal-logo" id="modalLogo"></div>
+    <span class="modal-status" id="modalStatus"></span>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <div class="modal-tags" id="modalTags"></div>
+    <a href="https://github.com/melisakumral" target="_blank" rel="noopener" class="modal-link" id="modalLink" data-i18n="projects.modalGithub">GitHub'da Gör ↗</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
