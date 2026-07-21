@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectModal();
   initAboutTabs();
   initBlogFeed();
+  initFeaturedGallery();
 });
 
 /* ---------- About section tabs (Bio / Experience / Certifications) ---------- */
@@ -69,11 +70,13 @@ function initBlogFeed() {
       cachedBlogPosts = (data.status === 'ok' && Array.isArray(data.items)) ? data.items.slice(0, 3) : [];
       const lang = document.documentElement.getAttribute('lang') || 'tr';
       renderBlogPosts(lang);
+      renderFeatured(lang);
     })
     .catch(() => {
       cachedBlogPosts = [];
       const lang = document.documentElement.getAttribute('lang') || 'tr';
       renderBlogPosts(lang);
+      renderFeatured(lang);
     });
 }
 
@@ -109,6 +112,138 @@ function renderBlogPosts(lang) {
         <span class="blog-read">${dateStr ? escapeHtml(dateStr) + ' · ' : ''}${readLabel}</span>
       </a>`;
   }).join('');
+}
+
+/* ---------- Featured (projects + Medium posts, newest first, horizontal gallery) ----------
+   ✏️ Yeni bir projeni öne çıkarmak istediğinde bu listeye bir obje ekle (en üste veya araya,
+   sıralama otomatik tarihe göre yapılır). Ekran görüntüsünü index.html ile aynı klasöre koyup
+   "image" alanına dosya adını yaz (örn. 'sentinel.png'). Görsel yoksa placeholder gösterilir.
+   Bu dosyayı GitHub'da düzenleyip kaydettiğinde Vercel otomatik olarak siteyi günceller. */
+const FEATURED_PROJECTS = [
+  {
+    title: { tr: 'Sentinel', en: 'Sentinel' },
+    desc: {
+      tr: "Stellar ağı üzerinde çalışan, merkeziyetsiz (non-custodial) bir kitle fonlama platformu. Fonlar ve anahtarlar hiçbir zaman Sentinel'de tutulmaz — her işlem kullanıcının kendi cüzdanında imzalanır ve zincir üzerinde doğrulanır.",
+      en: "A non-custodial crowdfunding platform built on the Stellar network. Sentinel never holds funds or keys — every transaction is signed in the user's own wallet and verified on-chain."
+    },
+    tag: { tr: 'Web3 / Blockchain', en: 'Web3 / Blockchain' },
+    date: '2026-07-21',
+    link: 'https://frontend-liart-eight-29.vercel.app/',
+    browserUrl: 'frontend-liart-eight-29.vercel.app',
+    image: null
+  }
+];
+
+function renderFeatured(lang) {
+  const gallery = document.getElementById('featuredGallery');
+  if (!gallery) return;
+
+  const posts = (cachedBlogPosts || []).map(post => ({
+    type: 'post',
+    title: post.title,
+    desc: stripHtml(post.description || '').trim(),
+    tag: (post.categories && post.categories[0]) || 'Medium',
+    date: post.pubDate,
+    link: post.link,
+    image: post.thumbnail || null
+  }));
+
+  const projects = FEATURED_PROJECTS.map(p => ({
+    type: 'project',
+    title: p.title[lang] || p.title.tr,
+    desc: p.desc[lang] || p.desc.tr,
+    tag: p.tag[lang] || p.tag.tr,
+    date: p.date,
+    link: p.link,
+    image: p.image,
+    browserUrl: p.browserUrl
+  }));
+
+  const items = [...projects, ...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  if (!items.length) {
+    const msg = translations['featured.empty'][lang] || translations['featured.empty'].tr;
+    gallery.innerHTML = `<div class="featured-empty">${escapeHtml(msg)}</div>`;
+    updateFeaturedArrows();
+    return;
+  }
+
+  const viewLiveLabel = translations['featured.viewLive'][lang] || translations['featured.viewLive'].tr;
+  const readPostLabel = translations['blog.read'][lang] || translations['blog.read'].tr;
+
+  gallery.innerHTML = items.map(item => {
+    const excerpt = item.desc.length > 140 ? item.desc.slice(0, 140).trim() + '…' : item.desc;
+
+    if (item.type === 'project') {
+      const visual = item.image
+        ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy">`
+        : `<div class="featured-mockup-placeholder">🛡</div>`;
+      return `
+        <a href="${item.link}" target="_blank" rel="noopener" class="featured-card">
+          <div class="featured-mockup">
+            <div class="featured-mockup-bar">
+              <span class="featured-mockup-dot red"></span>
+              <span class="featured-mockup-dot yellow"></span>
+              <span class="featured-mockup-dot green"></span>
+              <span class="featured-mockup-url">${escapeHtml(item.browserUrl || item.link)}</span>
+            </div>
+            <div class="featured-mockup-img">${visual}</div>
+          </div>
+          <div class="featured-card-body">
+            <span class="featured-card-tag">${escapeHtml(item.tag)}</span>
+            <h3 class="featured-card-title">${escapeHtml(item.title)}</h3>
+            <p class="featured-card-desc">${escapeHtml(excerpt)}</p>
+            <span class="featured-card-link">${viewLiveLabel}</span>
+          </div>
+        </a>`;
+    }
+
+    return `
+      <a href="${item.link}" target="_blank" rel="noopener" class="featured-card featured-card-post">
+        <div class="featured-post-visual">
+          ${item.image ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy">` : `<span class="featured-post-icon">✎</span>`}
+        </div>
+        <div class="featured-card-body">
+          <span class="featured-card-tag">${escapeHtml(item.tag)}</span>
+          <h3 class="featured-card-title">${escapeHtml(item.title)}</h3>
+          <p class="featured-card-desc">${escapeHtml(excerpt)}</p>
+          <span class="featured-card-link">${readPostLabel}</span>
+        </div>
+      </a>`;
+  }).join('');
+
+  updateFeaturedArrows();
+}
+
+function updateFeaturedArrows() {
+  const gallery = document.getElementById('featuredGallery');
+  const prevBtn = document.getElementById('featuredPrev');
+  const nextBtn = document.getElementById('featuredNext');
+  if (!gallery || !prevBtn || !nextBtn) return;
+  const maxScroll = gallery.scrollWidth - gallery.clientWidth - 2;
+  prevBtn.disabled = gallery.scrollLeft <= 2;
+  nextBtn.disabled = maxScroll <= 0 || gallery.scrollLeft >= maxScroll;
+}
+
+function initFeaturedGallery() {
+  const gallery = document.getElementById('featuredGallery');
+  const prevBtn = document.getElementById('featuredPrev');
+  const nextBtn = document.getElementById('featuredNext');
+  if (!gallery || !prevBtn || !nextBtn) return;
+
+  const scrollByCard = (dir) => {
+    const card = gallery.querySelector('.featured-card');
+    const amount = card ? card.getBoundingClientRect().width + 24 : 320;
+    gallery.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  };
+
+  prevBtn.addEventListener('click', () => scrollByCard(-1));
+  nextBtn.addEventListener('click', () => scrollByCard(1));
+  gallery.addEventListener('scroll', () => updateFeaturedArrows());
+  window.addEventListener('resize', () => updateFeaturedArrows());
+
+  const lang = document.documentElement.getAttribute('lang') || 'tr';
+  renderFeatured(lang);
 }
 
 /* ---------- Navbar scroll style ---------- */
@@ -155,6 +290,12 @@ const translations = {
   'sidebar.vertical': { tr: 'MELİSA — PORTFOLYO', en: 'MELISA — PORTFOLIO' },
   'dock.home': { tr: 'Ana Sayfa', en: 'Home' },
   'dock.about': { tr: 'Hakkımda', en: 'About' },
+  'dock.featured': { tr: 'Öne Çıkanlar', en: 'Featured' },
+  'featured.label': { tr: 'Vitrin', en: 'Showcase' },
+  'featured.title': { tr: 'Öne Çıkanlar', en: 'Featured' },
+  'featured.sub': { tr: 'En yeni projelerim ve yazılarım — yeni bir şey paylaştığımda burada otomatik görünür.', en: 'My newest projects and articles — new work appears here automatically.' },
+  'featured.empty': { tr: 'Henüz öne çıkan içerik yok.', en: 'No featured content yet.' },
+  'featured.viewLive': { tr: 'Canlı Görüntüle ↗', en: 'View Live ↗' },
   'dock.services': { tr: 'Hizmetler', en: 'Services' },
   'dock.projects': { tr: 'Projeler', en: 'Projects' },
   'dock.blog': { tr: 'Yazılar', en: 'Blog' },
@@ -236,6 +377,8 @@ const translations = {
   'services.c2.desc': { tr: 'Zafiyet taramaları, exploit geliştirme ve sızma testleri. OWASP standartlarına uygun kapsamlı güvenlik denetimleri.', en: 'Vulnerability scanning, exploit development and penetration testing. Comprehensive security audits aligned with OWASP standards.' },
   'services.c3.title': { tr: 'Full-Stack Entegrasyon', en: 'Full-Stack Integration' },
   'services.c3.desc': { tr: 'Python, PHP, C, SQL ile güvenli mimari tasarımı. Uçtan uca güvenli, ölçeklenebilir yazılım sistemleri geliştirme.', en: 'Secure architecture design with Python, PHP, C, SQL. Building end-to-end secure, scalable software systems.' },
+  'services.c4.title': { tr: 'Web Sitesi Geliştirme', en: 'Website Development' },
+  'services.c4.desc': { tr: 'Kurumsal siteden portföy sayfasına, modern ve güvenlik odaklı web siteleri tasarlayıp geliştiriyorum. Duyarlı tasarım, hızlı performans ve temiz kod önceliğim.', en: 'From corporate sites to portfolio pages, I design and build modern, security-conscious websites — responsive, fast, and cleanly coded.' },
   'projects.label': { tr: 'Seçilmiş Çalışmalar', en: 'Selected Work' },
   'projects.title': { tr: 'Projeler', en: 'Projects' },
   'projects.sub': { tr: 'Üzerinde çalıştığım öne çıkan projelerden bazıları. Detaylar için karta tıkla.', en: 'Some of the notable projects I have worked on. Click a card for details.' },
@@ -332,6 +475,7 @@ function applyLanguage(lang) {
   }
 
   if (cachedBlogPosts !== null) renderBlogPosts(lang);
+  renderFeatured(lang);
 }
 
 function initLanguage() {

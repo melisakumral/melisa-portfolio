@@ -56,6 +56,7 @@
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#hero" class="nav-link active" data-i18n="dock.home">Ana Sayfa</a></li>
+      <li><a href="#featured" class="nav-link" data-i18n="dock.featured">Öne Çıkanlar</a></li>
       <li><a href="#about" class="nav-link" data-i18n="dock.about">Hakkımda</a></li>
       <li><a href="#services" class="nav-link" data-i18n="dock.services">Hizmetler</a></li>
       <li><a href="#projects" class="nav-link" data-i18n="dock.projects">Projeler</a></li>
@@ -123,6 +124,21 @@
     </div>
 
     <a href="#about" class="scroll-hint" data-i18n="hero.scroll">Aşağı kaydır</a>
+  </section>
+
+  <!-- FEATURED (auto-updating: projects + Medium posts, newest first) -->
+  <section id="featured" class="section featured">
+    <div class="section-header fade-in">
+      <span class="about-label" data-i18n="featured.label">Vitrin</span>
+      <h2 class="section-title" data-i18n="featured.title">Öne Çıkanlar <span class="title-underline"></span></h2>
+      <p class="section-sub" data-i18n="featured.sub">En yeni projelerim ve yazılarım — yeni bir şey paylaştığımda burada otomatik görünür.</p>
+    </div>
+
+    <div class="featured-gallery-wrap fade-in">
+      <button class="featured-arrow featured-arrow-prev" id="featuredPrev" type="button" aria-label="Önceki">‹</button>
+      <div class="featured-gallery" id="featuredGallery"></div>
+      <button class="featured-arrow featured-arrow-next" id="featuredNext" type="button" aria-label="Sonraki">›</button>
+    </div>
   </section>
 
   <!-- ABOUT (tabbed: Bio / Experience / Certifications) -->
@@ -377,6 +393,13 @@
         <h3 data-i18n="services.c3.title">Full-Stack Entegrasyon</h3>
         <p data-i18n="services.c3.desc">Python, PHP, C, SQL ile güvenli mimari tasarımı. Uçtan uca güvenli, ölçeklenebilir yazılım sistemleri geliştirme.</p>
         <div class="card-tags"><span>Python</span><span>PHP</span><span>C</span><span>SQL</span></div>
+      </article>
+
+      <article class="service-card fade-in">
+        <span class="card-num">04</span>
+        <h3 data-i18n="services.c4.title">Web Sitesi Geliştirme</h3>
+        <p data-i18n="services.c4.desc">Kurumsal siteden portföy sayfasına, modern ve güvenlik odaklı web siteleri tasarlayıp geliştiriyorum. Duyarlı tasarım, hızlı performans ve temiz kod önceliğim.</p>
+        <div class="card-tags"><span>Web Design</span><span>Responsive</span><span>Vercel</span></div>
       </article>
     </div>
   </section>
